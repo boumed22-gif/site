@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dipôle RC — Fiche interactive | Boumed Academy</title>
+<script>
+window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] }, svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  :root{
+    --marine:#0d2b6b; --marine-clair:#1a4aa8; --vert:#1e8a4c; --vert-clair:#e6f5ec;
+    --bleu-clair:#e9f0fb; --creme:#fdf9ee; --or:#c9971c; --rouge:#c0392b;
+    --texte:#1c2536; --bord:#c4d2ea;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{max-width:100%; overflow-x:hidden;}
+  body{
+    font-family:"Segoe UI","Trebuchet MS",Arial,sans-serif;
+    background:linear-gradient(160deg,#f4f8ff,#eef7f1);
+    color:var(--texte); padding:12px 6px 40px;
+  }
+  .page{ max-width:920px; margin:0 auto; }
+
+  /* ===== EN-TÊTE ===== */
+  header{
+    background:linear-gradient(135deg,var(--marine),var(--marine-clair));
+    color:#fff; border-radius:20px; padding:22px 16px; text-align:center;
+    box-shadow:0 6px 20px rgba(13,43,107,.25); margin-bottom:16px;
+  }
+  header h1{ font-size:clamp(1.5rem,5vw,2.2rem); letter-spacing:.5px; }
+  header .sous{ color:#bcd3ff; font-weight:600; margin-top:6px; font-size:.95rem;}
+  header .badge{
+    display:inline-block; background:var(--vert); padding:4px 16px;
+    border-radius:20px; font-weight:700; margin-top:10px; font-size:.9rem;
+  }
+
+  /* ===== SECTIONS REPLIABLES ===== */
+  details.section{
+    background:#fff; border:2px solid var(--bord); border-radius:16px;
+    margin:14px 0; overflow:hidden; box-shadow:0 2px 8px rgba(13,43,107,.07);
+  }
+  details.section[open]{ border-color:var(--marine-clair); }
+  summary{
+    cursor:pointer; list-style:none; padding:14px 16px;
+    background:linear-gradient(90deg,var(--bleu-clair),#fff);
+    font-weight:800; font-size:1.05rem; color:var(--marine);
+    display:flex; align-items:center; gap:10px; user-select:none;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary .num{
+    background:var(--marine); color:#fff; min-width:36px; height:36px;
+    border-radius:10px; display:inline-flex; align-items:center;
+    justify-content:center; font-size:1rem;
+  }
+  summary .fleche{ margin-left:auto; transition:transform .25s; color:var(--vert); font-size:1.2rem;}
+  details[open] summary .fleche{ transform:rotate(90deg); }
+  .contenu{ padding:14px 16px 20px; }
+
+  h3.tit{
+    color:var(--vert); border-left:5px solid var(--vert);
+    padding-left:10px; margin:16px 0 8px; font-size:1rem;
+  }
+  p, li{ line-height:1.65; font-size:.97rem; }
+  ul{ padding-left:22px; margin:6px 0; }
+  .imp{ color:var(--rouge); font-weight:700; }
+  .kw{ color:var(--marine); font-weight:700; }
+
+  .encadre{
+    background:var(--vert-clair); border:2px solid var(--vert);
+    border-radius:12px; padding:10px 14px; margin:10px 0; font-weight:600;
+  }
+  .formule{
+    background:var(--creme); border:2px dashed var(--or);
+    border-radius:12px; padding:10px 14px; margin:10px 0;
+    text-align:center; overflow-x:auto;
+  }
+
+  /* ===== FIGURES ===== */
+  figure{ text-align:center; margin:12px 0; }
+  figure svg{ max-width:100%; height:auto; }
+  figcaption{ color:var(--marine-clair); font-weight:700; font-size:.85rem; margin-top:4px;}
+
+  /* ===== RÉVÉLATION (quiz) ===== */
+  .reveal{
+    display:inline-block; background:var(--marine); color:var(--marine);
+    border-radius:6px; padding:1px 12px; cursor:pointer; font-weight:800;
+    transition:all .3s; border:2px solid var(--marine); user-select:none;
+  }
+  .reveal.vu{ background:var(--vert-clair); color:var(--vert); border-color:var(--vert); }
+  .astuce{ font-size:.8rem; color:#667; font-style:italic; }
+
+  /* ===== SIMULATEUR ===== */
+  .simu{
+    background:#fff; border:3px solid var(--vert); border-radius:16px;
+    padding:14px; margin:14px 0;
+  }
+  .simu h3{ color:var(--marine); margin-bottom:10px; text-align:center;}
+  .curseurs{ display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:8px;}
+  .curseurs label{ font-weight:700; font-size:.9rem; color:var(--marine); display:block;}
+  .curseurs .grp{ flex:1 1 200px; max-width:260px; text-align:center;}
+  input[type=range]{ width:100%; accent-color:var(--vert); }
+  .valtau{
+    text-align:center; font-weight:900; font-size:1.15rem; color:var(--vert);
+    background:var(--vert-clair); border-radius:10px; padding:6px; margin:8px auto; max-width:420px;
+  }
+  .legende{ display:flex; gap:18px; justify-content:center; font-weight:700; font-size:.9rem; flex-wrap:wrap;}
+  .legende .uc::before{content:"— "; color:var(--rouge); font-weight:900;}
+  .legende .ur::before{content:"— "; color:var(--marine-clair); font-weight:900;}
+
+  footer{
+    text-align:center; margin-top:22px; color:var(--marine);
+    font-weight:700; font-size:.85rem;
+  }
+  .btn-print{
+    display:block; margin:18px auto 0; background:var(--marine); color:#fff;
+    border:none; border-radius:12px; padding:10px 26px; font-weight:800;
+    font-size:.95rem; cursor:pointer;
+  }
+  @media print{
+    details.section{ break-inside:avoid; }
+    details.section:not([open]) .contenu{ display:block; }
+    .btn-print, .simu{ display:none; }
+    body{ background:#fff; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <h1>⚡ Le Dipôle RC</h1>
+  <div class="sous">L'essentiel avant l'examen — Fiche interactive</div>
+  <div class="badge">Prof : Bouaoun M'hamed — Boumed Academy</div>
+</header>
+
+<!-- ============ RAPPELS ============ -->
+<details class="section" open>
+  <summary><span class="num">0</span> Rappels sur le condensateur <span class="fleche">▶</span></summary>
+  <div class="contenu">
+    <div class="formule">Capacité d'un condensateur plan : \( C = \varepsilon\,\dfrac{S}{e} = \varepsilon_0\,\varepsilon_r\,\dfrac{S}{e} \) — Unité : le <span class="kw">Farad (F)</span></div>
+    <div class="formule">Énergie électrique emmagasinée : \( E_c = \dfrac{1}{2}\,C\,U_C^{2} = \dfrac{1}{2}\,\dfrac{q^2}{C} = \dfrac{1}{2}\,q\,U_C \) — en <span class="kw">joules (J)</span></div>
+  </div>
+</details>
+
+<!-- ============ I. GÉNÉRATEUR DE COURANT ============ -->
+<details class="section" open>
+  <summary><span class="num">I</span> Charge à l'aide d'un générateur de courant (I = constante) <span class="fleche">▶</span></summary>
+  <div class="contenu">
+    <p>Condensateur initialement <span class="kw">déchargé</span> : à \(t=0\) : \(q_i = 0\) ; \(U_C = 0\).</p>
+
+    <h3 class="tit">Montage</h3>
+    <figure>
+      <svg viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="fv" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1e8a4c"/></marker>
+          <marker id="fr" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c0392b"/></marker>
+        </defs>
+        <!-- fils du circuit -->
+        <g stroke="#0d2b6b" stroke-width="4" fill="none" stroke-linecap="round">
+          <path d="M 95 70 H 155"/>                       <!-- haut gauche jusqu'à k -->
+          <path d="M 200 70 H 218"/>                      <!-- k -> A -->
+          <path d="M 274 70 H 480 V 105"/>                <!-- A -> coin droit -> R -->
+          <path d="M 480 175 V 205"/>                     <!-- R -> condensateur -->
+          <path d="M 480 227 V 265 H 95 V 205"/>          <!-- bas du circuit -->
+          <path d="M 95 145 V 70"/>                       <!-- gauche haut -->
+        </g>
+        <!-- générateur de courant (cercle barré horizontalement) -->
+        <circle cx="95" cy="175" r="30" fill="#fff" stroke="#0d2b6b" stroke-width="4"/>
+        <line x1="65" y1="175" x2="125" y2="175" stroke="#0d2b6b" stroke-width="4"/>
+        <!-- flèche UG -->
+        <line x1="150" y1="210" x2="150" y2="140" stroke="#1e8a4c" stroke-width="5" marker-end="url(#fv)"/>
+        <text x="165" y="180" font-weight="bold" font-size="20" fill="#0d2b6b">U</text>
+        <text x="181" y="188" font-size="14" font-weight="bold" fill="#0d2b6b">G</text>
+        <!-- flèche I (rouge) -->
+        <line x1="118" y1="112" x2="118" y2="86" stroke="#c0392b" stroke-width="4" marker-end="url(#fr)"/>
+        <text x="128" y="105" font-weight="bold" font-size="18" fill="#c0392b">I</text>
+        <!-- interrupteur k -->
+        <circle cx="160" cy="70" r="5" fill="#0d2b6b"/>
+        <circle cx="200" cy="70" r="5" fill="#0d2b6b"/>
+        <line x1="160" y1="70" x2="197" y2="46" stroke="#0d2b6b" stroke-width="4" stroke-linecap="round"/>
+        <text x="172" y="32" font-weight="bold" font-size="20" fill="#0d2b6b">k</text>
+        <!-- ampèremètre -->
+        <circle cx="246" cy="70" r="28" fill="#fff" stroke="#0d2b6b" stroke-width="4"/>
+        <text x="246" y="79" font-size="24" font-weight="bold" text-anchor="middle" fill="#0d2b6b">A</text>
+        <!-- résistance R -->
+        <rect x="464" y="105" width="32" height="70" fill="#fff" stroke="#0d2b6b" stroke-width="4"/>
+        <text x="512" y="147" font-weight="bold" font-size="20" fill="#0d2b6b">R</text>
+        <!-- flèche UR -->
+        <line x1="435" y1="175" x2="435" y2="110" stroke="#1e8a4c" stroke-width="5" marker-end="url(#fv)"/>
+        <text x="392" y="148" font-weight="bold" font-size="20" fill="#0d2b6b">U</text>
+        <text x="408" y="156" font-size="14" font-weight="bold" fill="#0d2b6b">R</text>
+        <!-- condensateur -->
+        <line x1="450" y1="209" x2="510" y2="209" stroke="#0d2b6b" stroke-width="5"/>
+        <line x1="450" y1="225" x2="510" y2="225" stroke="#0d2b6b" stroke-width="5"/>
+        <!-- flèche UC -->
+        <line x1="435" y1="248" x2="435" y2="192" stroke="#1e8a4c" stroke-width="5" marker-end="url(#fv)"/>
+        <text x="392" y="228" font-weight="bold" font-size="20" fill="#0d2b6b">U</text>
+        <text x="408" y="236" font-size="14" font-weight="bold" fill="#0d2b6b">C</text>
+      </svg>
+      <figcaption>Montage : générateur de courant — interrupteur k — ampèremètre — R et C en série</figcaption>
+    </figure>
+
+    <h3 class="tit">Courbes U<sub>C</sub>(t), U<sub>R</sub>(t) et U<sub>G</sub>(t)</h3>
+    <figure>
+      <svg viewBox="0 0 460 250" xmlns="http://www.w3.org/2000/svg">
+        <line x1="50" y1="215" x2="440" y2="215" stroke="#0d2b6b" stroke-width="2" marker-end="url(#fb)"/>
+        <line x1="50" y1="215" x2="50" y2="20" stroke="#0d2b6b" stroke-width="2" marker-end="url(#fb)"/>
+        <text x="60" y="25" font-weight="bold" font-size="14" fill="#0d2b6b">U (V)</text>
+        <text x="430" y="238" font-weight="bold" font-size="14" fill="#0d2b6b">t (s)</text>
+        <text x="42" y="230" font-size="13" fill="#0d2b6b">0</text>
+        <!-- UR = RI constante -->
+        <line x1="50" y1="150" x2="420" y2="150" stroke="#1a4aa8" stroke-width="3"/>
+        <text x="345" y="142" font-weight="bold" font-size="14" fill="#1a4aa8">U_R = RI</text>
+        <!-- UC droite -->
+        <line x1="50" y1="215" x2="380" y2="35" stroke="#c0392b" stroke-width="3"/>
+        <text x="388" y="40" font-weight="bold" font-size="14" fill="#c0392b">U_C</text>
+        <!-- UG affine -->
+        <line x1="50" y1="150" x2="330" y2="25" stroke="#1e8a4c" stroke-width="3"/>
+        <text x="338" y="28" font-weight="bold" font-size="14" fill="#1e8a4c">U_G</text>
+        <!-- t1 -->
+        <line x1="169" y1="215" x2="169" y2="150" stroke="#666" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <text x="165" y="232" font-weight="bold" font-size="13" fill="#0d2b6b">t₁</text>
+        <defs><marker id="fb" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0d2b6b"/></marker></defs>
+      </svg>
+      <figcaption>U<sub>R</sub> constante, U<sub>C</sub> droite linéaire, U<sub>G</sub> droite affine</figcaption>
+    </figure>
+
+    <ul>
+      <li>\( U_R = R\,I = \) <span class="kw">constante</span>.</li>
+      <li>\( U_C = \dfrac{q}{C} = \dfrac{I\,t}{C} = \dfrac{I}{C}\,t \) : droite <span class="kw">linéaire</span> d'équation \(U_C = a\,t\) avec \(a\) = pente.</li>
+    </ul>
+    <div class="formule">\( \dfrac{I}{C} = a \;\Rightarrow\; I = C\,a = \) constante \(\Rightarrow\) le générateur utilisé est un <span class="kw">générateur de courant</span>. De même \( C = \dfrac{I}{a} \) : capacité (F).</div>
+    <ul>
+      <li><span class="kw">Loi des mailles</span> : \( U_G(t) = U_C(t) + U_R(t) = \dfrac{I}{C}\,t + RI \) : droite affine.</li>
+      <li>\( U_{C\max} = \dfrac{q_{\max}}{C} = \dfrac{I}{C}\,t_{\max} \) donc \( t_{\max} = \dfrac{C\,U_{C\max}}{I} \). Pour charger <span class="imp">plus rapidement</span> : t diminue ⇒ on doit <span class="imp">augmenter l'intensité I</span>.</li>
+    </ul>
+    <div class="encadre">🧠 Testez-vous : à l'instant \(t_1\), \(U_C = U_R\) donc \(RI = \dfrac{I}{C}t_1\), ce qui signifie
+      \(t_1 = \) <span class="reveal" onclick="this.classList.add('vu')">RC</span>
+      <span class="astuce">(touchez pour révéler)</span>
+    </div>
+  </div>
+</details>
+
+<!-- ============ II. GÉNÉRATEUR DE TENSION ============ -->
+<details class="section" open>
+  <summary><span class="num">II</span> Charge à l'aide d'un générateur de tension <span class="fleche">▶</span></summary>
+  <div class="contenu">
+
+    <h3 class="tit">Montage</h3>
+    <figure>
+      <svg viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="fv2" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1e8a4c"/></marker>
+          <marker id="fr2" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c0392b"/></marker>
+        </defs>
+        <!-- fils du circuit -->
+        <g stroke="#0d2b6b" stroke-width="4" fill="none" stroke-linecap="round">
+          <path d="M 95 70 H 155"/>
+          <path d="M 200 70 H 218"/>
+          <path d="M 274 70 H 480 V 105"/>
+          <path d="M 480 175 V 205"/>
+          <path d="M 480 227 V 265 H 95 V 205"/>
+          <path d="M 95 145 V 70"/>
+        </g>
+        <!-- générateur de tension (cercle barré verticalement) -->
+        <circle cx="95" cy="175" r="30" fill="#fff" stroke="#0d2b6b" stroke-width="4"/>
+        <line x1="95" y1="138" x2="95" y2="212" stroke="#0d2b6b" stroke-width="4"/>
+        <!-- flèche E -->
+        <line x1="150" y1="210" x2="150" y2="140" stroke="#1e8a4c" stroke-width="5" marker-end="url(#fv2)"/>
+        <text x="165" y="182" font-weight="bold" font-size="20" fill="#0d2b6b">E</text>
+        <!-- flèche I (rouge) -->
+        <line x1="118" y1="112" x2="118" y2="86" stroke="#c0392b" stroke-width="4" marker-end="url(#fr2)"/>
+        <text x="128" y="105" font-weight="bold" font-size="18" fill="#c0392b">I</text>
+        <!-- interrupteur k -->
+        <circle cx="160" cy="70" r="5" fill="#0d2b6b"/>
+        <circle cx="200" cy="70" r="5" fill="#0d2b6b"/>
+        <line x1="160" y1="70" x2="197" y2="46" stroke="#0d2b6b" stroke-width="4" stroke-linecap="round"/>
+        <text x="172" y="32" font-weight="bold" font-size="20" fill="#0d2b6b">k</text>
+        <!-- ampèremètre -->
+        <circle cx="246" cy="70" r="28" fill="#fff" stroke="#0d2b6b" stroke-width="4"/>
+        <text x="246" y="79" font-size="24" font-weight="bold" text-anchor="middle" fill="#0d2b6b">A</text>
+        <!-- résistance R -->
+        <rect x="464" y="105" width="32" height="70" fill="#fff" stroke="#0d2b6b" stroke-width="4"/>
+        <text x="512" y="147" font-weight="bold" font-size="20" fill="#0d2b6b">R</text>
+        <!-- flèche UR -->
+        <line x1="435" y1="175" x2="435" y2="110" stroke="#1e8a4c" stroke-width="5" marker-end="url(#fv2)"/>
+        <text x="392" y="148" font-weight="bold" font-size="20" fill="#0d2b6b">U</text>
+        <text x="408" y="156" font-size="14" font-weight="bold" fill="#0d2b6b">R</text>
+        <!-- condensateur -->
+        <line x1="450" y1="209" x2="510" y2="209" stroke="#0d2b6b" stroke-width="5"/>
+        <line x1="450" y1="225" x2="510" y2="225" stroke="#0d2b6b" stroke-width="5"/>
+        <!-- flèche UC -->
+        <line x1="435" y1="248" x2="435" y2="192" stroke="#1e8a4c" stroke-width="5" marker-end="url(#fv2)"/>
+        <text x="392" y="228" font-weight="bold" font-size="20" fill="#0d2b6b">U</text>
+        <text x="408" y="236" font-size="14" font-weight="bold" fill="#0d2b6b">C</text>
+      </svg>
+      <figcaption>Montage : générateur de tension E — interrupteur k — ampèremètre — R et C en série</figcaption>
+    </figure>
+
+    <h3 class="tit">Réponse à un échelon de tension</h3>
+    <p>La réponse d'un dipôle RC à un échelon de tension est la <span class="kw">charge progressive</span> du condensateur : elle n'est <span class="imp">pas instantanée</span> et se fait en deux régimes :</p>
+    <ul>
+      <li><span class="kw">Régime transitoire</span> : \(U_C(t)\) <u>augmente</u> exponentiellement ; l'intensité \(i(t)\) <u>diminue</u> exponentiellement.</li>
+      <li><span class="kw">Régime permanent</span> : \(U_C = E\) (fem) ; \(i = 0\) : le condensateur se comporte comme un <span class="imp">interrupteur ouvert</span>.</li>
+    </ul>
+
+    <h3 class="tit">La constante de temps τ</h3>
+    <div class="encadre">📌 Définition : <span class="imp">τ est la durée au bout de laquelle le condensateur est chargé de 63 %.</span></div>
+    <ul>
+      <li>Si \(U_C = 0{,}63\,U_{C\max} = 0{,}63\,E\), alors \(t = \) <span class="reveal" onclick="this.classList.add('vu')">τ</span></li>
+      <li>Si \(U_R = 0{,}37\,U_{R\max} = 0{,}37\,E\), alors \(t = \) <span class="reveal" onclick="this.classList.add('vu')">τ</span></li>
+    </ul>
+
+    <h3 class="tit">Méthodes de la tangente à l'origine</h3>
+    <ul>
+      <li>Avec la courbe \(u_C(t)\) (ou \(q(t)\)) : l'intersection de la tangente à \(t = 0\) avec l'asymptote horizontale \(u_C = u_{C\max} = E\) (ou \(q = Q_{\max}\)) est un point d'abscisse \(t = \tau\).</li>
+      <li>Avec la courbe \(u_R(t)\) (ou \(i(t)\)) : l'intersection de la tangente à \(t = 0\) avec l'asymptote horizontale \(u_R = 0\) (ou \(i = 0\)) est un point d'abscisse \(t = \tau\).</li>
+    </ul>
+
+    <h3 class="tit">Équations différentielles et solutions</h3>
+    <p><span class="kw">Méthode</span> : représenter le schéma avec les flèches de l'intensité et des tensions, puis appliquer la loi des mailles.</p>
+    <div class="formule">En \(U_C\) : \( \dfrac{dU_C}{dt} + \dfrac{1}{\tau}\,U_C = \dfrac{E}{\tau} \) — Solution : \( U_C(t) = E\left(1 - e^{-t/\tau}\right) \)</div>
+    <div class="formule">En \(U_R\) : on a \(U_R + U_C = E\), on dérive : \( \dfrac{dU_R}{dt} + \dfrac{1}{\tau}\,U_R = 0 \) — Solution : \( U_R(t) = E\,e^{-t/\tau} \)</div>
+
+    <div class="encadre">🧠 À quel instant \(t_1\) a-t-on \(U_C = U_R\) ?<br>
+    \( E(1-e^{-t/\tau}) = E\,e^{-t/\tau} \Rightarrow 1 = 2e^{-t/\tau} \Rightarrow e^{-t/\tau} = \dfrac{1}{2} \Rightarrow t_1 = \)
+    <span class="reveal" onclick="this.classList.add('vu')">τ·ln 2</span></div>
+
+    <div class="encadre">⏱ Durée de charge : \( t_{\text{charge}} = 4{,}6\,\tau \approx \) <span class="reveal" onclick="this.classList.add('vu')">5 τ</span></div>
+  </div>
+</details>
+
+<!-- ============ SIMULATEUR ============ -->
+<div class="simu">
+  <h3>🔬 Simulateur interactif : influence de R et C sur la charge</h3>
+  <div class="curseurs">
+    <div class="grp"><label>E = <span id="vE">6</span> V</label>
+      <input type="range" id="sE" min="2" max="12" step="1" value="6"></div>
+    <div class="grp"><label>R = <span id="vR">2</span> kΩ</label>
+      <input type="range" id="sR" min="1" max="10" step="0.5" value="2"></div>
+    <div class="grp"><label>C = <span id="vC">100</span> µF</label>
+      <input type="range" id="sC" min="20" max="400" step="20" value="100"></div>
+  </div>
+  <div class="valtau">τ = R·C = <span id="vTau"></span> — U<sub>C</sub>(τ) = 0,63 E = <span id="v63"></span> V</div>
+  <div class="legende"><span class="uc">U_C(t) = E(1 − e^(−t/τ))</span><span class="ur">U_R(t) = E·e^(−t/τ)</span></div>
+  <figure><svg id="graph" viewBox="0 0 460 280" xmlns="http://www.w3.org/2000/svg"></svg></figure>
+</div>
+
+<button class="btn-print" onclick="ouvrirTout(); window.print()">🖨 Imprimer / PDF</button>
+
+<footer>⭐ Bon courage et plein de réussite ! — Boumed Academy — WhatsApp : +216 98 436 070</footer>
+</div>
+
+<script>
+function ouvrirTout(){ document.querySelectorAll('details').forEach(d=>d.open=true); }
+
+// ---------- Simulateur ----------
+const sE=document.getElementById('sE'), sR=document.getElementById('sR'), sC=document.getElementById('sC');
+const svg=document.getElementById('graph');
+const X0=52, Y0=245, LX=390, LY=210;   // repère
+const TMAX=6;                          // en secondes affichées
+
+function dessiner(){
+  const E=+sE.value, R=+sR.value*1000, C=+sC.value*1e-6;
+  const tau=R*C;
+  document.getElementById('vE').textContent=E;
+  document.getElementById('vR').textContent=sR.value;
+  document.getElementById('vC').textContent=sC.value;
+  document.getElementById('vTau').textContent=(tau<1? (tau*1000).toFixed(0)+' ms' : tau.toFixed(2)+' s');
+  document.getElementById('v63').textContent=(0.63*E).toFixed(2);
+
+  const Emax=12;
+  const px=t=>X0+LX*t/TMAX, py=u=>Y0-LY*u/Emax;
+  let uc='', ur='';
+  for(let i=0;i<=200;i++){
+    const t=TMAX*i/200, u1=E*(1-Math.exp(-t/tau)), u2=E*Math.exp(-t/tau);
+    uc+=(i?' ':'')+px(t).toFixed(1)+','+py(u1).toFixed(1);
+    ur+=(i?' ':'')+px(t).toFixed(1)+','+py(u2).toFixed(1);
+  }
+  const tTau=Math.min(tau,TMAX);
+  svg.innerHTML=`
+    <defs><marker id="fg" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#0d2b6b"/></marker></defs>
+    <line x1="${X0}" y1="${Y0}" x2="${X0+LX+12}" y2="${Y0}" stroke="#0d2b6b" stroke-width="2" marker-end="url(#fg)"/>
+    <line x1="${X0}" y1="${Y0}" x2="${X0}" y2="${Y0-LY-14}" stroke="#0d2b6b" stroke-width="2" marker-end="url(#fg)"/>
+    <text x="${X0+LX}" y="${Y0+22}" font-size="13" font-weight="bold" fill="#0d2b6b">t (s)</text>
+    <text x="${X0+6}" y="${Y0-LY-18}" font-size="13" font-weight="bold" fill="#0d2b6b">U (V)</text>
+    <text x="${X0-12}" y="${Y0+16}" font-size="12" fill="#0d2b6b">0</text>
+    <line x1="${X0}" y1="${py(E)}" x2="${X0+LX}" y2="${py(E)}" stroke="#1e8a4c" stroke-width="1.5" stroke-dasharray="6,5"/>
+    <text x="${X0+LX-40}" y="${py(E)-6}" font-size="12" font-weight="bold" fill="#1e8a4c">E = ${E} V</text>
+    <line x1="${px(tTau)}" y1="${Y0}" x2="${px(tTau)}" y2="${py(0.63*E)}" stroke="#c9971c" stroke-width="1.5" stroke-dasharray="5,4"/>
+    <line x1="${X0}" y1="${py(0.63*E)}" x2="${px(tTau)}" y2="${py(0.63*E)}" stroke="#c9971c" stroke-width="1.5" stroke-dasharray="5,4"/>
+    <text x="${px(tTau)-6}" y="${Y0+16}" font-size="12" font-weight="bold" fill="#c9971c">τ</text>
+    <text x="${X0+4}" y="${py(0.63*E)-5}" font-size="11" font-weight="bold" fill="#c9971c">0,63E</text>
+    <polyline points="${uc}" fill="none" stroke="#c0392b" stroke-width="3"/>
+    <polyline points="${ur}" fill="none" stroke="#1a4aa8" stroke-width="3"/>
+    ${[1,2,3,4,5].map(t=>`<line x1="${px(t)}" y1="${Y0}" x2="${px(t)}" y2="${Y0+5}" stroke="#0d2b6b" stroke-width="1.5"/>
+      <text x="${px(t)-4}" y="${Y0+18}" font-size="11" fill="#0d2b6b">${t}</text>`).join('')}
+  `;
+}
+[sE,sR,sC].forEach(s=>s.addEventListener('input',dessiner));
+dessiner();
+</script>
+</body>
+</html>
