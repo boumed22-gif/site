@@ -1,1 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IAG : débat entre sceptiques et optimistes</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    body {
+      background: #f2f4f8;
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      padding: 2rem 1rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .article-container {
+      max-width: 900px;
+      background: white;
+      border-radius: 28px;
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+      padding: 2.5rem 2rem;
+      transition: 0.2s;
+    }
+
+    /* typographie */
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #0a1a2b;
+      margin-bottom: 0.25rem;
+    }
+
+    .sous-titre {
+      font-size: 1rem;
+      color: #3a4a5e;
+      border-left: 4px solid #2a7de1;
+      padding-left: 1rem;
+      margin: 0.5rem 0 1.5rem 0;
+      background: #f0f5fe;
+      border-radius: 0 12px 12px 0;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    .chapo {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #1e2b3a;
+      background: #f7faff;
+      padding: 1.2rem 1.4rem;
+      border-radius: 20px;
+      margin-bottom: 2rem;
+      border: 1px solid #e6edf6;
+      font-weight: 450;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-top: 2.2rem;
+      margin-bottom: 0.8rem;
+      color: #0f283d;
+      border-bottom: 2px solid #dce5f0;
+      padding-bottom: 0.4rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 1.8rem 0 0.4rem 0;
+      color: #1a3752;
+    }
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #1f2c3b;
+      margin-bottom: 1.2rem;
+    }
+
+    ul, ol {
+      margin: 0.8rem 0 1.5rem 1.8rem;
+      font-size: 1.02rem;
+      line-height: 1.7;
+      color: #1f2c3b;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    blockquote {
+      background: #edf3fa;
+      border-left: 6px solid #1f6bc4;
+      padding: 0.8rem 1.6rem;
+      margin: 1.5rem 0;
+      border-radius: 0 16px 16px 0;
+      font-style: italic;
+      color: #0b2b47;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1.8rem 0 2rem 0;
+      border-radius: 18px;
+      border: 1px solid #dde4ed;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      font-size: 0.98rem;
+    }
+
+    th {
+      background: #142b40;
+      color: white;
+      font-weight: 600;
+      padding: 0.9rem 1rem;
+      text-align: left;
+    }
+
+    td {
+      padding: 0.9rem 1rem;
+      border-bottom: 1px solid #e9eef4;
+      vertical-align: top;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .badge {
+      background: #eef3fa;
+      padding: 0.2rem 0.6rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #1f4f7a;
+      letter-spacing: 0.3px;
+    }
+
+    hr {
+      margin: 2rem 0 1rem 0;
+      border: 0;
+      height: 2px;
+      background: linear-gradient(to right, #cbd8e9, transparent);
+    }
+
+    .footer-note {
+      margin-top: 1.8rem;
+      font-size: 0.95rem;
+      color: #3a4e66;
+      background: #f3f7fd;
+      padding: 0.9rem 1.2rem;
+      border-radius: 30px;
+      display: inline-block;
+      border: 1px solid #d6e2f0;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 1rem 0.5rem; }
+      .article-container { padding: 1.5rem 1rem; }
+      h1 { font-size: 1.8rem; }
+      .chapo { font-size: 1rem; padding: 1rem; }
+      p { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="article-container">
+    <h1>L’IAG est-elle impossible ? Un débat objectif entre scepticisme et espoir</h1>
+    <div class="sous-titre">
+      Intelligence artificielle générale · analyse des freins fondamentaux et des arguments des optimistes
+    </div>
+
+    <div class="chapo">
+      <strong>🔍 Contexte :</strong> L’intelligence artificielle générale (IAG), capable d’égaler l’intelligence humaine dans toutes ses dimensions, est le Saint-Graal de la recherche en IA depuis 1956. Pourtant, un nombre croissant de scientifiques et de philosophes affirment que cet idéal pourrait ne jamais voir le jour. L’article de <em>Science & Vie</em> s’inscrit dans cette controverse. Voici une analyse objective des arguments de chaque camp.
+    </div>
+
+    <!-- SECTION 1 : SCEPTIQUES -->
+    <h2>🧠 Le camp des sceptiques : pourquoi l’IAG resterait hors d’atteinte</h2>
+    <p>Les détracteurs de l’IAG ne sont pas des technophobes, mais des chercheurs qui pointent des limites fondamentales, ancrées dans les mathématiques, la physique et la nature même de la conscience.</p>
+
+    <h3>⚙️ L’argument mathématique : l’humain, un système non modélisable</h3>
+    <p>Dans leur ouvrage <em>Why Machines Will Never Rule the World</em>, le philosophe Barry Smith et le chercheur en IA Jobst Landgrebe avancent une thèse radicale : l’IAG est <strong>mathématiquement impossible</strong>.</p>
+    <ul>
+      <li>L’intelligence humaine est le produit du cerveau et du système nerveux, un <strong>système dynamique complexe</strong>.</li>
+      <li>De tels systèmes ne peuvent pas être modélisés mathématiquement pour fonctionner à l’intérieur d’un ordinateur, dont le fonctionnement est régi par une logique arithmétique discrète.</li>
+    </ul>
+    <p>En d’autres termes, l’esprit humain ne serait pas réductible à un algorithme. Les modèles actuels, aussi sophistiqués soient-ils (comme ChatGPT), ne sont que des « morceaux de mathématiques » capables d’imiter, mais pas de penser, ressentir ou vouloir.</p>
+
+    <h3>🧬 L’argument biologique : la conscience est incarnée</h3>
+    <p>Une autre approche, dite du <strong>Biological Idealism</strong>, conteste l’hypothèse physicaliste dominante. Selon elle, la conscience n’est pas un simple programme informatique (substrat indépendant), mais émerge d’un <strong>système vivant, métabolique et autopoïétique</strong>.</p>
+    <p>Des chercheurs comme Erik J. Bekkers et Anna Ciaunica soutiennent qu’une machine, aussi parfaite soit-elle dans son imitation des émotions, reste un <strong>artefact computationnel</strong>, non un sujet d’expérience. Elle manque de cette « intégrité vitale » propre aux êtres biologiques.</p>
+
+    <h3>📉 L’argument des priorités : le scepticisme des chercheurs de terrain</h3>
+    <p>Ce scepticisme théorique est partagé par une majorité de praticiens. Une enquête de l’Association pour l’avancement de l’IA (AAAI) révèle que <strong>76 % des 475 chercheurs interrogés estiment que les approches actuelles ne mèneront pas à l’IAG</strong>.</p>
+    <p>Ces chercheurs, au lieu de courir après le Graal, concentrent leurs efforts sur des enjeux plus pressants comme la fiabilité des systèmes. La lutte contre la désinformation générée par l’IA est devenue leur priorité numéro un.</p>
+
+    <hr>
+
+    <!-- SECTION 2 : OPTIMISTES -->
+    <h2>🚀 Le camp des optimistes : les arguments en faveur de l’IAG</h2>
+    <p>Bien que les sources soient majoritairement sceptiques, il est important de mentionner les arguments des partisans de l’IAG pour comprendre la controverse.</p>
+
+    <h3>📈 La foi dans le progrès technique</h3>
+    <p>L’argument le plus simple est historique : l’informatique a accompli des progrès exponentiels. Un modèle comme ChatGPT, qui semblait de la science-fiction il y a dix ans, est aujourd’hui une réalité. Pour les optimistes, l’IAG n’est qu’une question de <strong>puissance de calcul et de données</strong>.</p>
+
+    <h3>🧩 La défense du fonctionnalisme computationnel</h3>
+    <p>Philosophiquement, les optimistes adhèrent au <strong>fonctionnalisme</strong> : ce qui compte pour l’intelligence, c’est la <em>fonction</em>, non le <em>substrat</em>. Peu importe que le cerveau soit de la chair ou du silicium, tant que les calculs et les traitements de l’information sont les mêmes. Pour eux, la conscience n’est qu’un autre type de programme.</p>
+
+    <hr>
+
+    <!-- SYNTHESE TABLEAU -->
+    <h2>🔐 Synthèse : les obstacles à lever</h2>
+    <p>Les arguments sceptiques identifient plusieurs verrous majeurs qui alimentent le doute sur la faisabilité de l’IAG :</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Verrou identifié</th><th>Argument principal</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Modélisation des systèmes complexes</strong></td>
+            <td>L’esprit humain est un système dynamique complexe, possiblement non modélisable mathématiquement.</td>
+          </tr>
+          <tr>
+            <td><strong>Conscience incarnée</strong></td>
+            <td>La conscience est liée au vivant (autopoïèse, métabolisme), non à l’information. Une machine, aussi imitative soit-elle, ne serait pas un sujet.</td>
+          </tr>
+          <tr>
+            <td><strong>Hallucinations et fiabilité</strong></td>
+            <td>Avant de viser l’IAG, les chercheurs doivent résoudre les problèmes criants de fiabilité (hallucinations, erreurs). 77 % des chercheurs en font leur priorité.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CONCLUSION -->
+    <h2>🧭 Conclusion : un débat loin d’être clos</h2>
+    <p>L’IAG reste, pour l’heure, un objet de spéculation. La capture de <em>Science & Vie</em> reflète une position de plus en plus audible dans la communauté scientifique : l’IAG pourrait être une chimère. Les arguments mathématiques, biologiques et les priorités de la recherche nourrissent un scepticisme profond.</p>
+    <p>Cependant, les tenants de l’IAG conservent l’espoir que la puissance de calcul et les progrès des algorithmes finiront par trancher. En attendant, le débat philosophique sur la nature de la conscience reste le nerf de la guerre. Si la conscience est un programme, l’IAG est possible. Si elle est le propre du vivant, l’IAG restera probablement hors de portée.</p>
+    <blockquote>
+      « Ce dont nous sommes certains, c’est que les machines actuelles, bien que puissantes, ne “pensent” pas. Elles imitent, calculent, et parfois inventent, avec des conséquences réelles sur nos vies et la fiabilité de notre savoir. Le futur nous dira si un jour elles pourront faire plus que simuler l’intelligence humaine. »
+    </blockquote>
+
+    <hr>
+    <div class="footer-note">
+      📄 Article basé sur le débat ouvert par <em>Science & Vie</em> · analyse objective
+    </div>
+  </div>
+</body>
+</html>
