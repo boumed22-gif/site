@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -236,6 +236,38 @@
     opacity: 0.55;
     pointer-events: none;
   }
+
+  @media print {
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+    body {
+      margin: 0;
+      padding: 10px;
+      background: linear-gradient(135deg, #1a1040 0%, #2d1b6b 40%, #1a3a5c 100%) !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .card {
+      max-width: 100% !important;
+      width: 100% !important;
+      padding: 22px 22px 18px !important;
+      box-shadow: none !important;
+      page-break-inside: avoid;
+    }
+    .logo { width: 40px !important; height: 40px !important; }
+    .line1, .line2, .line3 { font-size: 38px !important; }
+    .headline { margin-bottom: 4px !important; }
+    .divider { margin: 10px 0 8px !important; }
+    .tagline { margin-bottom: 14px !important; font-size: 12px !important; }
+    .subjects { margin-bottom: 16px !important; }
+    .info-block { padding: 12px 16px !important; margin-bottom: 12px !important; }
+    .prof-block { padding: 10px 16px !important; margin-bottom: 4px !important; font-size: 14px !important; }
+    .prof-sub { margin-bottom: 10px !important; }
+    .whatsapp-btn { padding: 12px !important; font-size: 14px !important; margin-bottom: 10px !important; }
+    .bottom-note { font-size: 10px !important; }
+  }
 </style>
 </head>
 <body>
@@ -282,4 +314,3 @@
   <p class="bottom-note">Hammamet · Cité Erriadh · Places limitées</p>
 </div>
 </body>
-</html> 
