@@ -1,119 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dipôle RC — Fiche interactive | Boumed Academy</title>
-<meta name="description" content="Fiche interactive sur le dipôle RC : charge, constante de temps, équations et simulateur.">
-<script>
-window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
-</script>
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-<style>
-:root{--marine:#0d2b6b;--marine-clair:#1a4aa8;--vert:#1e8a4c;--vert-clair:#e6f5ec;--bleu-clair:#e9f0fb;--creme:#fdf9ee;--or:#c9971c;--rouge:#c0392b;--texte:#1c2536;--bord:#c4d2ea}
-*{box-sizing:border-box;margin:0;padding:0}html,body{max-width:100%;overflow-x:hidden}
-body{font-family:"Segoe UI",Arial,sans-serif;background:linear-gradient(160deg,#f4f8ff,#eef7f1);color:var(--texte);padding:12px 6px 40px}
-.page{max-width:920px;margin:auto}.retour{display:inline-block;margin:4px 0 12px;color:var(--marine);font-weight:800}
-header{background:linear-gradient(135deg,var(--marine),var(--marine-clair));color:#fff;border-radius:20px;padding:22px 16px;text-align:center;box-shadow:0 6px 20px #0d2b6b40;margin-bottom:16px}
-header h1{font-size:clamp(1.5rem,5vw,2.2rem)}header .sous{color:#bcd3ff;font-weight:600;margin-top:6px}.badge{display:inline-block;background:var(--vert);padding:4px 16px;border-radius:20px;font-weight:700;margin-top:10px}
-details.section{background:#fff;border:2px solid var(--bord);border-radius:16px;margin:14px 0;overflow:hidden;box-shadow:0 2px 8px #0d2b6b12}
-details.section[open]{border-color:var(--marine-clair)}
-summary{cursor:pointer;list-style:none;padding:14px 16px;background:linear-gradient(90deg,var(--bleu-clair),#fff);font-weight:800;color:var(--marine);display:flex;align-items:center;gap:10px}
-summary::-webkit-details-marker{display:none}.num{background:var(--marine);color:#fff;min-width:36px;height:36px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center}
-.fleche{margin-left:auto}.contenu{padding:14px 16px 20px}h3{color:var(--vert);border-left:5px solid var(--vert);padding-left:10px;margin:16px 0 8px}
-p,li{line-height:1.65}.kw{color:var(--marine);font-weight:700}.imp{color:var(--rouge);font-weight:700}
-ul{padding-left:22px}.encadre{background:var(--vert-clair);border:2px solid var(--vert);border-radius:12px;padding:10px 14px;margin:10px 0;font-weight:600}
-.formule{background:var(--creme);border:2px dashed var(--or);border-radius:12px;padding:10px 14px;margin:10px 0;text-align:center;overflow-x:auto}
-.simu{background:#fff;border:3px solid var(--vert);border-radius:16px;padding:14px;margin:14px 0}.simu h3{text-align:center;border:0}
-.curseurs{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}.grp{flex:1 1 200px;max-width:260px;text-align:center}
-.grp label{font-weight:700;color:var(--marine)}input[type=range]{width:100%;accent-color:var(--vert)}
-.valtau{text-align:center;font-weight:900;color:var(--vert);background:var(--vert-clair);border-radius:10px;padding:8px;margin:10px auto}
-.btn-print{display:block;margin:18px auto;background:var(--marine);color:#fff;border:0;border-radius:12px;padding:10px 26px;font-weight:800}
-footer{text-align:center;margin-top:22px;color:var(--marine);font-weight:700;font-size:.85rem}
-@media print{.btn-print,.retour,.simu{display:none}body{background:#fff}}
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Articles — Boumed Academy</title>
+<link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
-<div class="page">
-<a class="retour" href="../../">← Retour au blog</a>
-<header>
-<h1>⚡ Le Dipôle RC</h1>
-<div class="sous">L'essentiel avant l'examen — Fiche interactive</div>
-<div class="badge">Prof : Bouaoun M'hamed — Boumed Academy</div>
-</header>
-
-<details class="section" open>
-<summary><span class="num">0</span> Rappels sur le condensateur <span class="fleche">▶</span></summary>
-<div class="contenu">
-<div class="formule">\(C=\varepsilon\,\dfrac{S}{e}=\varepsilon_0\varepsilon_r\dfrac{S}{e}\) — unité : farad (F)</div>
-<div class="formule">\(E_c=\dfrac12CU_C^2=\dfrac12\dfrac{q^2}{C}=\dfrac12qU_C\)</div>
+<header class="site-header"><div class="wrap">
+<div class="brand">Articles — Boumed Academy</div>
+<nav class="nav"><a href="../">Accueil</a><a href="./">Articles</a></nav>
+</div></header>
+<main class="wrap">
+<section class="grid">
+<article class="card">
+<div class="card-top">⚡</div>
+<div class="card-body">
+<div class="meta">Physique • Dipôle RC</div>
+<h2>Le dipôle RC</h2>
+<p>Une fiche interactive complète avec rappels, formules, courbes et simulateur.</p>
+<a class="btn" href="dipole-rc/">Lire l’article</a>
 </div>
-</details>
-
-<details class="section" open>
-<summary><span class="num">I</span> Charge avec un générateur de courant <span class="fleche">▶</span></summary>
-<div class="contenu">
-<p>Pour un condensateur initialement déchargé : \(q(0)=0\) et \(U_C(0)=0\).</p>
-<div class="formule">\(q(t)=It\qquad ;\qquad U_C(t)=\dfrac{I}{C}t\)</div>
-<ul>
-<li>\(U_R=RI\) est constante.</li>
-<li>La pente de \(U_C(t)\) vaut \(a=I/C\), donc \(C=I/a\).</li>
-<li>La loi des mailles donne \(U_G(t)=U_C(t)+U_R(t)=\dfrac{I}{C}t+RI\).</li>
-<li>Lorsque \(U_C=U_R\), on obtient \(t_1=RC\).</li>
-</ul>
-</div>
-</details>
-
-<details class="section" open>
-<summary><span class="num">II</span> Charge avec un générateur de tension <span class="fleche">▶</span></summary>
-<div class="contenu">
-<p>La charge n'est pas instantanée. Elle comprend un régime transitoire puis un régime permanent.</p>
-<div class="encadre">Constante de temps : \(\tau=RC\). À \(t=\tau\), \(U_C=0{,}63E\).</div>
-<div class="formule">\(\dfrac{dU_C}{dt}+\dfrac{1}{\tau}U_C=\dfrac{E}{\tau}\)</div>
-<div class="formule">\(U_C(t)=E\left(1-e^{-t/\tau}\right)\)</div>
-<div class="formule">\(U_R(t)=Ee^{-t/\tau}\qquad ;\qquad i(t)=\dfrac{E}{R}e^{-t/\tau}\)</div>
-<ul>
-<li>À l'état permanent : \(U_C=E\) et \(i=0\).</li>
-<li>Lorsque \(U_C=U_R\), \(t_1=\tau\ln 2\).</li>
-<li>La charge est pratiquement terminée après environ \(5\tau\).</li>
-</ul>
-</div>
-</details>
-
-<div class="simu">
-<h3>🔬 Simulateur : influence de R et C</h3>
-<div class="curseurs">
-<div class="grp"><label>E = <span id="vE">6</span> V</label><input type="range" id="sE" min="2" max="12" value="6"></div>
-<div class="grp"><label>R = <span id="vR">2</span> kΩ</label><input type="range" id="sR" min="1" max="10" step=".5" value="2"></div>
-<div class="grp"><label>C = <span id="vC">100</span> µF</label><input type="range" id="sC" min="20" max="400" step="20" value="100"></div>
-</div>
-<div class="valtau">τ = <span id="vTau"></span> — U<sub>C</sub>(τ) = <span id="v63"></span> V</div>
-<svg id="graph" viewBox="0 0 460 280" style="width:100%;height:auto"></svg>
-</div>
-
-<button class="btn-print" onclick="window.print()">🖨 Imprimer / PDF</button>
-<footer>⭐ Boumed Academy — WhatsApp : +216 98 436 070</footer>
-</div>
-<script>
-const sE=document.getElementById('sE'),sR=document.getElementById('sR'),sC=document.getElementById('sC'),svg=document.getElementById('graph');
-const X0=52,Y0=245,LX=390,LY=210,TMAX=6;
-function draw(){
- const E=+sE.value,R=+sR.value*1000,C=+sC.value*1e-6,tau=R*C;
- vE.textContent=E;vR.textContent=sR.value;vC.textContent=sC.value;
- vTau.textContent=tau<1?(tau*1000).toFixed(0)+' ms':tau.toFixed(2)+' s';
- v63.textContent=(.63*E).toFixed(2);
- const px=t=>X0+LX*t/TMAX,py=u=>Y0-LY*u/12;
- let uc='',ur='';
- for(let i=0;i<=200;i++){let t=TMAX*i/200;uc+=(i?' ':'')+px(t)+','+py(E*(1-Math.exp(-t/tau)));ur+=(i?' ':'')+px(t)+','+py(E*Math.exp(-t/tau));}
- svg.innerHTML=`<defs><marker id="a" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="#0d2b6b"/></marker></defs>
- <line x1="${X0}" y1="${Y0}" x2="${X0+LX+10}" y2="${Y0}" stroke="#0d2b6b" stroke-width="2" marker-end="url(#a)"/>
- <line x1="${X0}" y1="${Y0}" x2="${X0}" y2="20" stroke="#0d2b6b" stroke-width="2" marker-end="url(#a)"/>
- <polyline points="${uc}" fill="none" stroke="#c0392b" stroke-width="3"/>
- <polyline points="${ur}" fill="none" stroke="#1a4aa8" stroke-width="3"/>
- <line x1="${X0}" y1="${py(E)}" x2="${X0+LX}" y2="${py(E)}" stroke="#1e8a4c" stroke-dasharray="6 5"/>
- <text x="390" y="${py(E)-6}" fill="#1e8a4c" font-size="12">E=${E} V</text>`;
-}
-[sE,sR,sC].forEach(x=>x.addEventListener('input',draw));draw();
-</script>
+</article>
+</section>
+</main>
+<footer>© Boumed Academy</footer>
 </body>
 </html>
