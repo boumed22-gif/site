@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mon Meilleur Prof de Physique – Cours Physique Lycée Hammamet</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --blue-deep: #0D2B6E;
+    --blue-mid: #1A4DB8;
+    --blue-light: #3B82F6;
+    --blue-pale: #EFF6FF;
+    --accent: #F59E0B;
+    --white: #FFFFFF;
+    --gray-50: #F8FAFC;
+    --gray-100: #F1F5F9;
+    --gray-300: #CBD5E1;
+    --gray-500: #64748B;
+    --gray-700: #334155;
+    --gray-900: #0F172A;
+    --radius: 14px;
+    --radius-sm: 8px;
+    --shadow: 0 4px 24px rgba(13,43,110,0.10);
+    --shadow-lg: 0 8px 40px rgba(13,43,110,0.16);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;color:var(--gray-900);background:var(--white);overflow-x:hidden}
+  h1,h2,h3,h4{font-family:'Sora',sans-serif}
+  img{max-width:100%;display:block}
+  a{text-decoration:none;color:inherit}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-100);transition:box-shadow .3s}
+  .nav-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+  .nav-logo{font-family:'Sora',sans-serif;font-weight:800;font-size:1.1rem;color:var(--blue-deep);line-height:1.2}
+  .nav-logo span{color:var(--blue-light)}
+  .nav-links{display:flex;align-items:center;gap:28px}
+  .nav-links a{font-size:.9rem;font-weight:500;color:var(--gray-700);transition:color .2s}
+  .nav-links a:hover{color:var(--blue-mid)}
+  .btn-wa-nav{background:var(--blue-mid);color:#fff;padding:9px 20px;border-radius:50px;font-size:.88rem;font-weight:600;display:flex;align-items:center;gap:7px;transition:background .2s,transform .15s}
+  .btn-wa-nav:hover{background:var(--blue-deep);transform:translateY(-1px)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+  .hamburger span{width:24px;height:2px;background:var(--blue-deep);border-radius:4px;transition:all .3s}
+  .mobile-menu{display:none;position:fixed;top:65px;left:0;right:0;background:#fff;padding:20px 24px;border-bottom:1px solid var(--gray-100);z-index:999;flex-direction:column;gap:16px;box-shadow:0 8px 32px rgba(0,0,0,.08)}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{font-size:1rem;font-weight:500;color:var(--gray-700);padding:8px 0;border-bottom:1px solid var(--gray-100)}
+
+  /* HERO */
+  .hero{min-height:100vh;background:linear-gradient(135deg,var(--blue-deep) 0%,#1A4DB8 55%,#2563EB 100%);display:flex;align-items:center;padding:100px 24px 60px;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-80px;right:-80px;width:500px;height:500px;background:rgba(255,255,255,0.04);border-radius:50%;pointer-events:none}
+  .hero::after{content:'';position:absolute;bottom:-120px;left:-60px;width:400px;height:400px;background:rgba(245,158,11,0.07);border-radius:50%;pointer-events:none}
+  .hero-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .hero-text{position:relative;z-index:1}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(245,158,11,0.18);border:1px solid rgba(245,158,11,0.4);color:var(--accent);padding:6px 16px;border-radius:50px;font-size:.82rem;font-weight:600;letter-spacing:.5px;margin-bottom:24px;text-transform:uppercase}
+  .hero h1{font-size:clamp(2rem,4vw,3.1rem);font-weight:800;color:#fff;line-height:1.18;margin-bottom:20px}
+  .hero h1 span{color:var(--accent)}
+  .hero-sub{font-size:1.1rem;color:rgba(255,255,255,.82);line-height:1.7;margin-bottom:36px;max-width:520px}
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+  .btn-primary{background:var(--accent);color:var(--gray-900);padding:14px 28px;border-radius:50px;font-weight:700;font-size:1rem;display:inline-flex;align-items:center;gap:9px;transition:all .2s;box-shadow:0 4px 20px rgba(245,158,11,.35)}
+  .btn-primary:hover{background:#E08B00;transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,158,11,.45)}
+  .btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.4);padding:14px 28px;border-radius:50px;font-weight:600;font-size:1rem;display:inline-flex;align-items:center;gap:9px;transition:all .2s}
+  .btn-outline:hover{background:rgba(255,255,255,.1);border-color:#fff}
+  .hero-visual{position:relative;z-index:1;display:flex;justify-content:center;align-items:center}
+  .hero-card{background:rgba(255,255,255,.10);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.18);border-radius:24px;padding:36px;width:100%;max-width:400px;animation:float 4s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .hero-card-icon{width:70px;height:70px;background:var(--accent);border-radius:18px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:2rem}
+  .hero-card h3{color:#fff;font-size:1.3rem;font-weight:700;margin-bottom:10px}
+  .hero-card p{color:rgba(255,255,255,.75);font-size:.95rem;line-height:1.6}
+  .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+  .stat-box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px 16px;text-align:center}
+  .stat-box strong{display:block;font-size:1.5rem;font-weight:800;color:#fff;font-family:'Sora',sans-serif}
+  .stat-box small{font-size:.78rem;color:rgba(255,255,255,.65)}
+
+  /* TRUST BAND */
+  .trust{background:var(--white);padding:36px 24px;border-bottom:1px solid var(--gray-100)}
+  .trust-inner{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:24px}
+  .trust-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+  .trust-item .icon{width:46px;height:46px;background:var(--blue-pale);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+  .trust-item p{font-size:.85rem;font-weight:600;color:var(--gray-700);line-height:1.3}
+
+  /* SECTION LABELS */
+  .section-label{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue-light);margin-bottom:12px}
+  .section-title{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800;color:var(--blue-deep);line-height:1.22;margin-bottom:16px}
+  .section-sub{font-size:1rem;color:var(--gray-500);line-height:1.7;max-width:600px}
+
+  /* PROBLEM / SOLUTION */
+  .problem{padding:90px 24px;background:var(--gray-50)}
+  .problem-inner{max-width:1100px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+  .problem-visual{background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:18px}
+  .problem-icon-row{display:flex;align-items:center;gap:16px;background:#fff;border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+  .problem-icon-row .ico{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+  .ico-red{background:#FEE2E2}
+  .ico-green{background:#DCFCE7}
+  .problem-icon-row div strong{display:block;font-size:.95rem;font-weight:600;color:var(--gray-900)}
+  .problem-icon-row div span{font-size:.83rem;color:var(--gray-500)}
+  .benefits{display:flex;flex-direction:column;gap:16px;margin-top:24px}
+  .benefit-item{display:flex;align-items:flex-start;gap:14px}
+  .benefit-item .check{width:30px;height:30px;background:var(--blue-mid);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;flex-shrink:0;margin-top:2px}
+  .benefit-item div strong{display:block;font-weight:600;color:var(--gray-900);margin-bottom:3px}
+  .benefit-item div p{font-size:.9rem;color:var(--gray-500);line-height:1.55}
+
+  /* PILLARS */
+  .pillars{padding:90px 24px;background:var(--white)}
+  .pillars-inner{max-width:1100px;margin:auto}
+  .pillars-header{text-align:center;margin-bottom:56px}
+  .pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .pillar-card{border:1px solid var(--gray-100);border-radius:var(--radius);padding:32px;transition:all .25s;cursor:default;position:relative;overflow:hidden}
+  .pillar-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue-light),var(--blue-mid));opacity:0;transition:opacity .25s}
+  .pillar-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--blue-light)}
+  .pillar-card:hover::before{opacity:1}
+  .pillar-ico{width:52px;height:52px;background:var(--blue-pale);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:20px}
+  .pillar-card h3{font-size:1.1rem;font-weight:700;color:var(--blue-deep);margin-bottom:10px}
+  .pillar-card p{font-size:.9rem;color:var(--gray-500);line-height:1.65;margin-bottom:14px}
+  .pillar-benefit{font-size:.85rem;font-weight:600;color:var(--blue-light)}
+  .btn-link{display:inline-flex;align-items:center;gap:5px;font-size:.88rem;font-weight:600;color:var(--blue-mid);margin-top:16px;transition:gap .2s}
+  .btn-link:hover{gap:10px}
+
+  /* OFFERS */
+  .offers{padding:90px 24px;background:var(--blue-pale)}
+  .offers-inner{max-width:1100px;margin:auto}
+  .offers-header{text-align:center;margin-bottom:56px}
+  .offers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .offer-card{background:#fff;border-radius:var(--radius);overflow:hidden;border:2px solid transparent;transition:all .25s;position:relative}
+  .offer-card.featured{border-color:var(--blue-mid);box-shadow:var(--shadow-lg)}
+  .offer-badge{position:absolute;top:16px;right:16px;background:var(--blue-mid);color:#fff;font-size:.75rem;font-weight:700;padding:4px 12px;border-radius:50px;text-transform:uppercase;letter-spacing:.5px}
+  .offer-badge.gold{background:var(--accent);color:var(--gray-900)}
+  .offer-img{height:200px;background:linear-gradient(135deg,var(--blue-pale),#BFDBFE);display:flex;align-items:center;justify-content:center;font-size:3.5rem}
+  .offer-body{padding:28px}
+  .offer-body h3{font-size:1.15rem;font-weight:700;color:var(--blue-deep);margin-bottom:8px}
+  .offer-body p{font-size:.88rem;color:var(--gray-500);margin-bottom:16px;line-height:1.6}
+  .offer-features{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+  .offer-features li{font-size:.87rem;color:var(--gray-700);display:flex;align-items:center;gap:8px}
+  .offer-features li::before{content:'✓';color:var(--blue-light);font-weight:700;flex-shrink:0}
+  .offer-price{font-family:'Sora',sans-serif;font-size:1.6rem;font-weight:800;color:var(--blue-deep);margin-bottom:18px}
+  .offer-price small{font-size:.85rem;font-weight:500;color:var(--gray-500)}
+  .btn-offer{width:100%;background:var(--blue-mid);color:#fff;padding:13px;border-radius:50px;font-weight:700;font-size:.95rem;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;transition:background .2s,transform .15s;font-family:'Inter',sans-serif}
+  .btn-offer:hover{background:var(--blue-deep);transform:translateY(-1px)}
+  .btn-offer.outline{background:transparent;color:var(--blue-mid);border:2px solid var(--blue-mid)}
+  .btn-offer.outline:hover{background:var(--blue-pale)}
+
+  /* HOW IT WORKS */
+  .how{padding:90px 24px;background:var(--white)}
+  .how-inner{max-width:900px;margin:auto;text-align:center}
+  .how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px;position:relative}
+  .how-steps::before{content:'';position:absolute;top:36px;left:calc(16.66% + 20px);right:calc(16.66% + 20px);height:2px;background:linear-gradient(90deg,var(--blue-light),var(--blue-mid));z-index:0}
+  .step{display:flex;flex-direction:column;align-items:center;gap:14px;position:relative;z-index:1}
+  .step-num{width:72px;height:72px;background:var(--blue-mid);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Sora',sans-serif;font-size:1.6rem;font-weight:800;box-shadow:0 4px 20px rgba(26,77,184,.3)}
+  .step h3{font-size:1rem;font-weight:700;color:var(--blue-deep)}
+  .step p{font-size:.88rem;color:var(--gray-500);line-height:1.6;max-width:230px}
+
+  /* ABOUT */
+  .about{padding:90px 24px;background:var(--blue-deep);position:relative;overflow:hidden}
+  .about::before{content:'';position:absolute;right:-100px;top:-100px;width:400px;height:400px;background:rgba(255,255,255,.03);border-radius:50%}
+  .about-inner{max-width:1100px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+  .about-visual{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:48px;display:flex;flex-direction:column;gap:24px}
+  .about-visual .big-icon{font-size:4rem;text-align:center}
+  .about-stat{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.07);border-radius:12px;padding:16px}
+  .about-stat strong{font-size:1.4rem;font-weight:800;color:var(--accent);font-family:'Sora',sans-serif}
+  .about-stat span{font-size:.85rem;color:rgba(255,255,255,.7)}
+  .about-text .section-label{color:var(--accent)}
+  .about-text .section-title{color:#fff}
+  .about-text p{color:rgba(255,255,255,.75);line-height:1.75;margin-bottom:20px;font-size:.95rem}
+  .about-text .highlight{background:rgba(245,158,11,.15);border-left:3px solid var(--accent);padding:14px 18px;border-radius:0 8px 8px 0;color:rgba(255,255,255,.9);font-style:italic;margin:20px 0;font-size:.95rem}
+
+  /* STATS */
+  .stats{padding:70px 24px;background:var(--white);border-top:1px solid var(--gray-100);border-bottom:1px solid var(--gray-100)}
+  .stats-inner{max-width:960px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:28px;text-align:center}
+  .stat-item strong{display:block;font-family:'Sora',sans-serif;font-size:2.4rem;font-weight:800;color:var(--blue-mid);line-height:1}
+  .stat-item p{font-size:.88rem;color:var(--gray-500);margin-top:6px}
+  .stat-item small{font-size:.78rem;color:var(--gray-300)}
+
+  /* TESTIMONIALS */
+  .testimonials{padding:90px 24px;background:var(--gray-50)}
+  .testi-inner{max-width:1100px;margin:auto}
+  .testi-header{text-align:center;margin-bottom:56px}
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .testi-card{background:#fff;border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--gray-100);transition:transform .2s}
+  .testi-card:hover{transform:translateY(-3px)}
+  .stars{display:flex;gap:4px;margin-bottom:18px}
+  .stars span{color:var(--accent);font-size:1.1rem}
+  .testi-card blockquote{font-size:.95rem;color:var(--gray-700);line-height:1.7;margin-bottom:22px;font-style:italic}
+  .testi-author{display:flex;align-items:center;gap:14px}
+  .avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--blue-light),var(--blue-deep));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-family:'Sora',sans-serif;font-size:1.1rem;flex-shrink:0}
+  .testi-author div strong{display:block;font-size:.9rem;font-weight:700;color:var(--gray-900)}
+  .testi-author div small{font-size:.8rem;color:var(--gray-500)}
+  .testi-note{text-align:center;margin-top:24px;font-size:.82rem;color:var(--gray-300);font-style:italic}
+
+  /* FAQ */
+  .faq{padding:90px 24px;background:var(--white)}
+  .faq-inner{max-width:780px;margin:auto}
+  .faq-header{text-align:center;margin-bottom:50px}
+  .faq-item{border:1px solid var(--gray-100);border-radius:var(--radius-sm);margin-bottom:12px;overflow:hidden}
+  .faq-q{width:100%;background:none;border:none;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;text-align:left;font-family:'Inter',sans-serif;font-size:.97rem;font-weight:600;color:var(--gray-900);cursor:pointer;gap:16px}
+  .faq-q .arrow{width:28px;height:28px;background:var(--blue-pale);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .25s;font-size:.85rem}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s}
+  .faq-a.open{max-height:300px;padding:0 24px 20px}
+  .faq-a p{font-size:.9rem;color:var(--gray-500);line-height:1.7}
+  .faq-q.active .arrow{transform:rotate(180deg);background:var(--blue-mid);color:#fff}
+
+  /* CTA FINAL */
+  .cta-final{padding:100px 24px;background:linear-gradient(135deg,var(--blue-deep),#2563EB);text-align:center;position:relative;overflow:hidden}
+  .cta-final::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 70% 50%,rgba(245,158,11,.12),transparent 60%)}
+  .cta-final-inner{position:relative;z-index:1;max-width:700px;margin:auto}
+  .cta-final h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;margin-bottom:18px}
+  .cta-final p{font-size:1.05rem;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:40px}
+  .cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .guarantee-row{display:flex;justify-content:center;gap:24px;margin-top:36px;flex-wrap:wrap}
+  .guarantee-item{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.75);font-size:.85rem}
+  .guarantee-item span{font-size:1.1rem}
+
+  /* LEAD MAGNET */
+  .lead{padding:80px 24px;background:var(--accent)}
+  .lead-inner{max-width:700px;margin:auto;text-align:center}
+  .lead h2{font-family:'Sora',sans-serif;font-size:1.8rem;font-weight:800;color:var(--gray-900);margin-bottom:12px}
+  .lead p{font-size:1rem;color:rgba(0,0,0,.65);margin-bottom:32px;line-height:1.65}
+  .lead-form{display:flex;gap:12px;max-width:480px;margin:auto}
+  .lead-form input{flex:1;padding:13px 18px;border:2px solid rgba(0,0,0,.15);border-radius:50px;font-size:.95rem;font-family:'Inter',sans-serif;background:#fff;color:var(--gray-900);outline:none}
+  .lead-form input:focus{border-color:var(--blue-mid)}
+  .btn-lead{background:var(--blue-deep);color:#fff;padding:13px 24px;border-radius:50px;font-weight:700;border:none;cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;font-size:.95rem;transition:background .2s}
+  .btn-lead:hover{background:var(--blue-mid)}
+  .lead-privacy{font-size:.78rem;color:rgba(0,0,0,.5);margin-top:14px}
+
+  /* FOOTER */
+  footer{background:var(--gray-900);color:rgba(255,255,255,.7);padding:60px 24px 30px}
+  .footer-inner{max-width:1100px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}
+  .footer-brand h3{font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:12px}
+  .footer-brand p{font-size:.88rem;line-height:1.7;margin-bottom:18px}
+  .footer-contact a{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.7);font-size:.87rem;margin-bottom:10px;transition:color .2s}
+  .footer-contact a:hover{color:#fff}
+  .footer-col h4{font-size:.92rem;font-weight:700;color:#fff;margin-bottom:18px;font-family:'Sora',sans-serif}
+  .footer-col a{display:block;font-size:.85rem;color:rgba(255,255,255,.6);margin-bottom:10px;transition:color .2s}
+  .footer-col a:hover{color:#fff}
+  .social-row{display:flex;gap:10px;margin-top:6px}
+  .social-btn{width:36px;height:36px;background:rgba(255,255,255,.08);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:background .2s}
+  .social-btn:hover{background:var(--blue-mid)}
+  .footer-bottom{max-width:1100px;margin:40px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:gap;font-size:.8rem;gap:12px}
+
+  /* UTILS */
+  .center{text-align:center}
+  .mb-4{margin-bottom:16px}
+  .mt-6{margin-top:24px}
+
+  /* RESPONSIVE */
+  @media(max-width:1024px){
+    .hero-inner,.problem-inner,.about-inner,.footer-inner{grid-template-columns:1fr}
+    .pillars-grid,.offers-grid,.testi-grid,.stats-inner{grid-template-columns:repeat(2,1fr)}
+    .trust-inner{grid-template-columns:repeat(3,1fr)}
+    .hero-visual{display:none}
+    .how-steps::before{display:none}
+    .footer-inner{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:640px){
+    .nav-links,.btn-wa-nav{display:none}
+    .hamburger{display:flex}
+    .pillars-grid,.offers-grid,.testi-grid,.stats-inner,.how-steps,.trust-inner{grid-template-columns:1fr}
+    .hero{padding:80px 20px 50px}
+    .hero-ctas{flex-direction:column}
+    .btn-primary,.btn-outline{width:100%;justify-content:center}
+    .lead-form{flex-direction:column}
+    .footer-inner{grid-template-columns:1fr}
+    .cta-btns{flex-direction:column}
+    .cta-btns a{width:100%;justify-content:center;text-align:center}
+    .footer-bottom{flex-direction:column;text-align:center}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <div class="nav-logo">⚛️ Mon Meilleur<br><span>Prof de Physique</span></div>
+    <div class="nav-links">
+      <a href="#hero">Accueil</a>
+      <a href="#offers">Nos offres</a>
+      <a href="#pillars">Avantages</a>
+      <a href="#testimonials">Témoignages</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="https://wa.me/21698436070?text=Bonjour%2C%20je%20voudrais%20m%27inscrire%20aux%20cours%20de%20physique" target="_blank" class="btn-wa-nav">
+      💬 Contacter sur WhatsApp
+    </a>
+    <div class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#hero" onclick="toggleMenu()">🏠 Accueil</a>
+  <a href="#offers" onclick="toggleMenu()">📚 Nos offres</a>
+  <a href="#pillars" onclick="toggleMenu()">✅ Avantages</a>
+  <a href="#testimonials" onclick="toggleMenu()">⭐ Témoignages</a>
+  <a href="#contact" onclick="toggleMenu()">📞 Contact</a>
+  <a href="https://wa.me/21698436070?text=Bonjour%2C%20je%20voudrais%20m%27inscrire%20aux%20cours%20de%20physique" target="_blank" style="background:var(--blue-mid);color:#fff;border-radius:50px;text-align:center;padding:12px;border:none">
+    💬 Contacter sur WhatsApp
+  </a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="badge">🏆 Professeur principal – Hammamet / En ligne</div>
+      <h1>La physique <span>enfin simple</span>,<br>pour tous les lycéens</h1>
+      <p class="hero-sub">Des cours clairs, progressifs et personnalisés pour comprendre la physique sans stress — que vous soyez en section math, sciences ou technique.</p>
+      <div class="hero-ctas">
+        <a href="https://wa.me/21698436070?text=Bonjour%2C%20je%20voudrais%20m%27inscrire%20aux%20cours%20de%20physique" target="_blank" class="btn-primary">💬 S'inscrire via WhatsApp</a>
+        <a href="#offers" class="btn-outline">📖 Voir les offres</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-icon">⚡</div>
+        <h3>Physique expliquée simplement</h3>
+        <p>Des explications claires, des exercices guidés et un suivi individuel pour progresser à votre rythme.</p>
+        <div class="hero-stats">
+          <div class="stat-box"><strong>5 000+</strong><small>Élèves aidés</small></div>
+          <div class="stat-box"><strong>30+</strong><small>D'expérience</small></div>
+          <div class="stat-box"><strong>95 %</strong><small>Satisfaction</small></div>
+          <div class="stat-box"><strong>⭐ 4.9</strong><small>Note moyenne</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAND -->
+<section class="trust">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <div class="icon">📐</div>
+      <p>Cours adaptés à chaque section</p>
+    </div>
+    <div class="trust-item">
+      <div class="icon">🎯</div>
+      <p>Méthode claire et progressive</p>
+    </div>
+    <div class="trust-item">
+      <div class="icon">💻</div>
+      <p>Cours en ligne ou à Hammamet</p>
+    </div>
+    <div class="trust-item">
+      <div class="icon">🕐</div>
+      <p>Horaires flexibles</p>
+    </div>
+    <div class="trust-item">
+      <div class="icon">🔒</div>
+      <p>Suivi personnalisé garanti</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM / SOLUTION -->
+<section class="problem" id="about-problem">
+  <div class="problem-inner">
+    <div class="problem-visual">
+      <div class="problem-icon-row">
+        <div class="ico ico-red">😓</div>
+        <div>
+          <strong>Sans accompagnement</strong>
+          <span>Formules incomprises, résultats décevants</span>
+        </div>
+      </div>
+      <div class="problem-icon-row">
+        <div class="ico ico-green">🚀</div>
+        <div>
+          <strong>Avec Mon Meilleur Prof</strong>
+          <span>Confiance retrouvée, notes améliorées</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="section-label">Pourquoi ça change tout</span>
+      <h2 class="section-title">La physique devient claire quand elle est bien enseignée</h2>
+      <p class="section-sub" style="margin-bottom:28px">Trop d'élèves peinent avec la physique non pas par manque d'intelligence, mais parce que les explications ne leur correspondent pas. Un suivi adapté change tout.</p>
+      <div class="benefits">
+        <div class="benefit-item">
+          <div class="check">✓</div>
+          <div><strong>Comprendre les concepts fondamentaux</strong><p>Des explications simples, des analogies du quotidien, sans jargon inutile.</p></div>
+        </div>
+        <div class="benefit-item">
+          <div class="check">✓</div>
+          <div><strong>Maîtriser les exercices d'examen</strong><p>Entraînement ciblé sur les types de problèmes posés au bac.</p></div>
+        </div>
+        <div class="benefit-item">
+          <div class="check">✓</div>
+          <div><strong>Reprendre confiance en soi</strong><p>Un cadre bienveillant où les questions sont toujours les bienvenues.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars" id="pillars">
+  <div class="pillars-inner">
+    <div class="pillars-header">
+      <span class="section-label">Ce que nous proposons</span>
+      <h2 class="section-title">Tout ce qu'il faut pour exceller en physique</h2>
+      <p class="section-sub" style="margin:auto">Un accompagnement complet, structuré et bienveillant, pour progresser à chaque étape du lycée.</p>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-ico">📚</div>
+        <h3>Cours de soutien</h3>
+        <p>Reprise des leçons mal comprises, révision des chapitres difficiles et consolidation des bases, section par section.</p>
+        <div class="pillar-benefit">→ Combler les lacunes rapidement</div>
+        <a href="#offers" class="btn-link">En savoir plus →</a>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-ico">✏️</div>
+        <h3>Préparation aux examens</h3>
+        <p>Entraînement sur des sujets d'annales, correction détaillée et stratégies pour gagner des points le jour J.</p>
+        <div class="pillar-benefit">→ Aborder le bac avec sérénité</div>
+        <a href="#offers" class="btn-link">En savoir plus →</a>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-ico">💻</div>
+        <h3>Cours en ligne</h3>
+        <p>Sessions live interactives via vidéo, ressources partagées et suivi de progression depuis chez vous.</p>
+        <div class="pillar-benefit">→ Apprendre depuis n'importe où</div>
+        <a href="#offers" class="btn-link">En savoir plus →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERS -->
+<section class="offers" id="offers">
+  <div class="offers-inner">
+    <div class="offers-header">
+      <span class="section-label">Nos formules</span>
+      <h2 class="section-title">Choisissez votre formule de cours</h2>
+      <p class="section-sub" style="margin:auto">Des formules adaptées à chaque profil d'élève et à chaque budget.</p>
+    </div>
+    <div class="offers-grid">
+      <div class="offer-card">
+        <div class="offer-img">📖</div>
+        <div class="offer-body">
+          <h3>Cours individuel</h3>
+          <p>Session en face à face ou en ligne, entièrement dédiée à vos besoins spécifiques.</p>
+          <ul class="offer-features">
+            <li>1h à 2h par séance</li>
+            <li>Programme personnalisé</li>
+            <li>Exercices adaptés à votre niveau</li>
+          </ul>
+          <div class="offer-price">50 DT <small>/ séance</small></div>
+          <a href="https://wa.me/21698436070?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20cours%20individuel" target="_blank"><button class="btn-offer outline">💬 S'inscrire</button></a>
+        </div>
+      </div>
+      <div class="offer-card featured">
+        <div class="offer-badge gold">⭐ Meilleur choix</div>
+        <div class="offer-img">🎯</div>
+        <div class="offer-body">
+          <h3>Formule mensuelle</h3>
+          <p>Suivi régulier sur le mois avec un planning de séances et un bilan hebdomadaire.</p>
+          <ul class="offer-features">
+            <li>4 à 8 séances par mois</li>
+            <li>Fiches de révision offertes</li>
+            <li>Suivi de progression inclus</li>
+          </ul>
+          <div class="offer-price">80 DT <small>/ mois</small></div>
+          <a href="https://wa.me/21698436070?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20la%20formule%20mensuelle" target="_blank"><button class="btn-offer">💬 S'inscrire</button></a>
+        </div>
+      </div>
+      <div class="offer-card">
+        <div class="offer-badge">Nouveau</div>
+        <div class="offer-img">🏆</div>
+        <div class="offer-body">
+          <h3>Prépa Bac intensif</h3>
+          <p>Programme accéléré pour les terminales : révisions complètes et simulations d'examen.</p>
+          <ul class="offer-features">
+            <li>Toute l'année scolaire couverte</li>
+            <li>Sujets de bac corrigés</li>
+            <li>Session de questions / réponses</li>
+          </ul>
+          <div class="offer-price">Sur devis</div>
+          <a href="https://wa.me/21698436070?text=Je%20suis%20int%C3%A9ress%C3%A9%20par%20la%20pr%C3%A9pa%20bac" target="_blank"><button class="btn-offer outline">💬 S'inscrire</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="how-inner">
+    <span class="section-label">Comment ça marche</span>
+    <h2 class="section-title">Inscrit en 3 étapes simples</h2>
+    <p class="section-sub" style="margin:auto">De votre premier message à votre premier cours, tout est simple et rapide.</p>
+    <div class="how-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Contactez-nous</h3>
+        <p>Envoyez un message WhatsApp en indiquant votre niveau et votre section.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Choisissez votre formule</h3>
+        <p>On évalue ensemble vos besoins et on définit le programme le plus adapté.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Commencez à progresser</h3>
+        <p>Votre première séance est planifiée. Plus qu'à apprendre !</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / COMMUNITY -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-visual">
+      <div class="big-icon">👨‍🏫</div>
+      <div class="about-stat"><strong>30+</strong><span>D'expérience en enseignement</span></div>
+      <div class="about-stat"><strong>5 000+</strong><span>Élèves accompagnés avec succès</span></div>
+      <div class="about-stat"><strong>Math & Sciences</strong><span>Toutes sections lycée couvertes</span></div>
+    </div>
+    <div class="about-text">
+      <span class="section-label">Notre philosophie</span>
+      <h2 class="section-title">Un professeur qui croit en chaque élève</h2>
+      <p>Ici, il n'y a pas d'élèves "nuls en physique". Il y a des élèves qui n'ont pas encore trouvé la bonne méthode. Ma mission est simple : vous aider à comprendre vraiment, pas seulement à mémoriser.</p>
+      <p>Chaque cours est préparé spécialement pour vous. Vos lacunes deviennent nos priorités, vos progrès deviennent notre fierté.</p>
+      <div class="highlight">"La physique n'est difficile que lorsqu'elle est mal expliquée. Avec la bonne méthode, tout élève peut y réussir."</div>
+      <p>Cours disponibles à Hammamet-Nabeul et en ligne sur toute la Tunisie.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat-item"><strong>5 000+</strong><p>Élèves accompagnés</p><small>depuis le début</small></div>
+    <div class="stat-item"><strong>⭐ 4.9/5</strong><p>Note moyenne</p><small>satisfaction élèves</small></div>
+    <div class="stat-item"><strong>95 %</strong><p>Taux de réussite</p><small>au bac en physique</small></div>
+    <div class="stat-item"><strong>30+</strong><p>Années d'expérience</p><small>en enseignement lycée</small></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="testi-inner">
+    <div class="testi-header">
+      <span class="section-label">Témoignages</span>
+      <h2 class="section-title">Ce que disent mes élèves</h2>
+      <p class="section-sub" style="margin:auto">Des explications claires, un accompagnement personnalisé et surtout des résultats concrets.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <blockquote>« Grâce aux cours de M. Bouaoun, j'ai enfin compris la physique. Mes notes sont passées de 8 à 16 sur 20 en seulement deux mois. »</blockquote>
+        <div class="testi-author">
+          <div class="avatar">A</div>
+          <div><strong>Ahmed</strong><small>4ᵉ Sciences de l'informatique · Hammamet</small></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <blockquote>« Le professeur explique chaque notion avec patience et clarté. Avant, j'appréhendais la physique ; aujourd'hui, c'est l'une de mes matières préférées. »</blockquote>
+        <div class="testi-author">
+          <div class="avatar">R</div>
+          <div><strong>Riadh</strong><small>4ᵉ Sciences expérimentales · Nabeul</small></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <blockquote>« Les cours en ligne sont bien organisés et faciles à suivre. Grâce à cet accompagnement, j'ai obtenu une excellente note en physique au baccalauréat. »</blockquote>
+        <div class="testi-author">
+          <div class="avatar">S</div>
+          <div><strong>Samir</strong><small>4ᵉ Sciences techniques · Cours en ligne</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="faq-inner">
+    <div class="faq-header">
+      <span class="section-label">Questions fréquentes</span>
+      <h2 class="section-title">Vous avez des questions ?</h2>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Quels niveaux et sections sont acceptés ?<div class="arrow">▼</div></button>
+      <div class="faq-a"><p>Les cours s'adressent à tous les lycéens : 1ère et 2ème années secondaire, sections Mathématiques, Sciences Expérimentales, Sciences Techniques et Économie. Les cours sont adaptés à chaque niveau.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Les cours se déroulent-ils à domicile ou en ligne ?<div class="arrow">▼</div></button>
+      <div class="faq-a"><p>Les deux options sont disponibles. Les cours en présentiel se déroulent à Hammamet-Nabeul. Les cours en ligne sont accessibles depuis toute la Tunisie via vidéo en direct.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Comment se déroule la première séance ?<div class="arrow">▼</div></button>
+      <div class="faq-a"><p>La première séance est une évaluation pour identifier vos lacunes et définir un programme personnalisé. Elle est proposée à tarif découverte. Contactez-nous via WhatsApp pour la planifier.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Quels sont les tarifs et les moyens de paiement ?<div class="arrow">▼</div></button>
+      <div class="faq-a"><p>Les tarifs varient selon la formule choisie. Le paiement se fait par séance ou au mois. Contactez-nous pour obtenir la grille tarifaire complète et choisir la formule adaptée à votre budget.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Comment annuler ou reporter une séance ?<div class="arrow">▼</div></button>
+      <div class="faq-a"><p>Les séances peuvent être reportées avec un préavis de 24 heures. Un message WhatsApp suffit pour prévenir. Une séance non signalée dans ce délai peut être comptabilisée.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Proposez-vous des fiches et supports de cours ?<div class="arrow">▼</div></button>
+      <div class="faq-a"><p>Oui. Des fiches de révision synthétiques et des exercices supplémentaires sont fournis régulièrement selon votre formule. Pour la prépa bac, des annales corrigées sont incluses.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Mon enfant est très faible, est-ce adapté ?<div class="arrow">▼</div></button>
+      <div class="faq-a"><p>Absolument. La méthode est pensée pour repartir des bases et avancer à un rythme adapté. Des élèves très en difficulté ont obtenu des résultats remarquables avec un suivi régulier.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Puis-je essayer avant de m'engager ?<div class="arrow">▼</div></button>
+      <div class="faq-a"><p>Oui, une première séance d'évaluation est disponible sans engagement pour découvrir la méthode. Contactez-nous via WhatsApp pour en bénéficier.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="cta-final-inner">
+    <h2>Prêt à décrocher vos meilleures notes en physique ?</h2>
+    <p>Rejoignez les élèves qui ont transformé leur rapport à la physique. Inscrivez-vous dès aujourd'hui et commencez à progresser dès la première séance.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/21698436070?text=Bonjour%2C%20je%20souhaite%20m%27inscrire%20aux%20cours%20de%20physique" target="_blank" class="btn-primary">💬 S'inscrire maintenant sur WhatsApp</a>
+      <a href="#faq" class="btn-outline">❓ J'ai encore des questions</a>
+    </div>
+    <div class="guarantee-row">
+      <div class="guarantee-item"><span>✅</span> Première séance d'évaluation</div>
+      <div class="guarantee-item"><span>📍</span> Hammamet & En ligne</div>
+      <div class="guarantee-item"><span>🕐</span> Réponse sous 24h</div>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD MAGNET -->
+<section class="lead" id="lead">
+  <div class="lead-inner">
+    <h2>📥 Reçois tes fiches de révision GRATUITES</h2>
+    <p>Inscris-toi et reçois immédiatement un pack de fiches de révision sur les chapitres clés du programme de physique — classiques du bac inclus.</p>
+    <div class="lead-form">
+      <input type="email" placeholder="Votre adresse e-mail"/>
+      <button class="btn-lead" onclick="handleLead()">Je télécharge →</button>
+    </div>
+    <p class="lead-privacy">🔒 Vos données restent privées. Aucun spam.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>⚛️ Mon Meilleur Prof de Physique</h3>
+      <p>Professeur principal de physique-chimie, dédié à la réussite de chaque lycéen en Tunisie.</p>
+      <div class="footer-contact">
+        <a href="https://wa.me/21698436070" target="_blank">📱 +216 98 436 070</a>
+        <a href="mailto:boumed22@gmail.com">✉️ boumed22@gmail.com</a>
+        <a href="#">📍 Hammamet-Nabeul, Tunisie</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Liens rapides</h4>
+      <a href="#hero">Accueil</a>
+      <a href="#offers">Nos formules</a>
+      <a href="#pillars">Avantages</a>
+      <a href="#testimonials">Témoignages</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>Nos cours</h4>
+      <a href="#offers">Cours individuel</a>
+      <a href="#offers">Formule mensuelle</a>
+      <a href="#offers">Prépa Bac</a>
+      <a href="#offers">Cours en ligne</a>
+    </div>
+    <div class="footer-col">
+      <h4>Réseaux sociaux</h4>
+      <div class="social-row">
+        <a href="https://www.facebook.com/boumedetude" target="_blank" class="social-btn" title="Facebook Boumed Étude">📘</a>
+        <a href="https://www.facebook.com/bouaoun.MD" target="_blank" class="social-btn" title="Facebook Bouaoun MD">📘</a>
+        <a href="https://wa.me/21698436070" target="_blank" class="social-btn" title="WhatsApp">💬</a>
+      </div>
+      <br>
+      <a href="#">Mentions légales</a>
+      <a href="#">Politique de confidentialité</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span id="year"></span> Mon Meilleur Prof de Physique – Tous droits réservés</span>
+    <span>Hammamet-Nabeul, Tunisie • Cours en ligne sur toute la Tunisie</span>
+  </div>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile menu
+  function toggleMenu(){
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // FAQ accordion
+  function toggleFaq(btn){
+    const answer = btn.nextElementSibling;
+    const allBtns = document.querySelectorAll('.faq-q');
+    const allAnswers = document.querySelectorAll('.faq-a');
+    allBtns.forEach(b=>{if(b!==btn){b.classList.remove('active')}});
+    allAnswers.forEach(a=>{if(a!==answer){a.classList.remove('open')}});
+    btn.classList.toggle('active');
+    answer.classList.toggle('open');
+  }
+
+  // Nav shadow on scroll
+  window.addEventListener('scroll',()=>{
+    const nav = document.getElementById('main-nav');
+    nav.style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,.1)' : 'none';
+  });
+
+  // Lead magnet
+  function handleLead(){
+    const input = document.querySelector('.lead-form input');
+    if(input.value && input.value.includes('@')){
+      alert('Merci ! 🎉 Votre pack de fiches sera envoyé à : ' + input.value);
+      input.value = '';
+    } else {
+      alert('Veuillez entrer une adresse e-mail valide.');
+    }
+  }
+
+  // Smooth reveal on scroll
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.style.opacity='1';
+        e.target.style.transform='translateY(0)';
+      }
+    });
+  },{threshold:0.12});
+  document.querySelectorAll('.pillar-card,.offer-card,.testi-card,.step,.trust-item,.benefit-item,.stat-item').forEach(el=>{
+    el.style.opacity='0';
+    el.style.transform='translateY(24px)';
+    el.style.transition='opacity .55s ease, transform .55s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
